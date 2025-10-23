@@ -1,3 +1,8 @@
+.container {
+  display: grid;
+  place-items: center;
+}
+
 .box {
   border: 1px solid black;
   width: 500px;
@@ -7,19 +12,35 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 0.625rem;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 30px;
+  font-size: 1.5rem;
+}
+
+body {
+  margin: 0;
+}
+
+.reset-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
 
 .win {
-  border: 2px solid green;
+  border: 5px solid green;
 }
 
 .lose {
-  border: 2px solid red;
+  border: 5px solid red;
 }
 
 .tie {
-  border: 2px solid black;
+  border: 5px solid purple;
 }
 
 .item-img {

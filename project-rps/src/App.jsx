@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import Box from "./component/Box";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandBackFist, faHandPaper, faHandScissors } from "@fortawesome/free-regular-svg-icons";
-import { faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faHandBackFist, faHandPaper, faHandPeace } from "@fortawesome/free-regular-svg-icons";
+import { faQuestion, faRotateRight } from "@fortawesome/free-solid-svg-icons";
 
 // 1. 박스 2개(타이틀(유저/컴퓨터), 사진, 결과(승/패/무승부))
 // 2. 초기 이미지
@@ -22,7 +22,7 @@ const choice = {
   },
   scissors: {
     name: "Scissors",
-    img: <FontAwesomeIcon icon={faHandScissors} />,
+    img: <FontAwesomeIcon icon={faHandPeace} />,
   },
   paper: {
     name: "Paper",
@@ -64,19 +64,37 @@ function App() {
   const randomChoice = () => {
     let itemArray = Object.keys(choice); // itemArray[0] = "rock", itemArray[1] = "scissors", itemArray[2] = "paper"
     let randomItem = Math.floor(Math.random() * itemArray.length); // Math.random 메서드는 0이상 1미만의 소수점만 반환하므로 소수점 제거 + itemArray의 인덱스에 접근하기 위해 itemArray.length를 곱함
-    let final = itemArray[randomItem]; // itemArray[0], itemArray[1], itemArray[2]를 랜덤하게 final 변수에 저장
+    let final = itemArray[randomItem]; // itemArray[0], itemArray[1], itemArray[2]에 있는 값(rock, scissors, paper)를 final에 랜덤하게 할당
     return choice[final];
   };
+
+  // 게임 초기화
+  const handleRest = () => {
+    setUserSelect(initImg);
+    setComputerSelect(initImg);
+  };
+
   return (
-    <div>
+    <div className="container">
       <div className="main">
         <Box title="You" item={userSelect} result={result} />
         <Box title="Computer" item={computerSelect} result={result} />
       </div>
       <div className="main">
-        <button onClick={() => play("scissors")}>가위</button>
-        <button onClick={() => play("rock")}>바위</button>
-        <button onClick={() => play("paper")}>보</button>
+        <button onClick={() => play("scissors")}>
+          <FontAwesomeIcon icon={faHandPeace} size="3x" /> = 가위
+        </button>
+        <button onClick={() => play("rock")}>
+          <FontAwesomeIcon icon={faHandBackFist} size="3x" /> = 바위
+        </button>
+        <button onClick={() => play("paper")}>
+          <FontAwesomeIcon icon={faHandPaper} size="3x" /> = 보
+        </button>
+      </div>
+      <div className="reset-btn">
+        <button onClick={() => handleRest()}>
+          <FontAwesomeIcon icon={faRotateRight} size="2x" />
+        </button>
       </div>
     </div>
   );
